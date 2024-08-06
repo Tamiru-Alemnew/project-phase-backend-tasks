@@ -11,11 +11,11 @@ import (
 
 // LibraryController handles library operations through the LibraryService interface
 type LibraryController struct {
-    library *services.Library
+    library services.LibraryManager
 }
 
 // NewLibraryController creates a new LibraryController
-func NewLibraryController(library *services.Library) *LibraryController {
+func NewLibraryController(library services.LibraryManager) *LibraryController {
     return &LibraryController{library: library}
 }
 
