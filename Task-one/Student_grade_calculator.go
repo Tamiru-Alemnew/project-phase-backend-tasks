@@ -1,59 +1,86 @@
 package main
 
 import (
-    "fmt"
+	"fmt"
 )
 
+type Student struct {
+	Name         string
+	SubjectScores map[string]int
+	AverageGrade  float64
+}
 
-func main(){
+func main() {
 	var name string
-	var number_of_suject int
-	
+	var numberOfSubjects int
+
 	fmt.Println("What is your name?")
 	fmt.Scanln(&name)
+
 	fmt.Println("Please provide the number of subjects you have taken")
-	fmt.Scanln(&number_of_suject)
-	fmt.Println(name , number_of_suject)
+	fmt.Scanln(&numberOfSubjects)
+	if numberOfSubjects <= 0 {
+		fmt.Println("Invalid number of subjects. Please enter a positive integer.")
+		return
+	}
 
-	subject_to_score := map[string]int{}
+	subjectToScore := make(map[string]int)
 
-	for i:= 0 ; i < number_of_suject;i++ {
-		var subject_name string
-		var subject_score int
+	for i := 0; i < numberOfSubjects; i++ {
+		var subjectName string
+		var subjectScore int
 
 		fmt.Println("Enter the subject name")
-		fmt.Scanln(&subject_name)
-		fmt.Println("Enter the subject score")
-		fmt.Scanln(&subject_score)
-		subject_to_score[subject_name] = subject_score
+		fmt.Scanln(&subjectName)
 
-	}
-
-	fmt.Println("This is the subjects and their scores")
-
-	for key, value := range subject_to_score{
-		var grade string
-		if value >= 70{
-			grade = "A"
-		}else if value >= 60{
-			grade = "B"
-		}else if value >= 50{
-			grade = "C"
-		}else if value >= 40{
-			grade = "D"
-		}else{
-			grade = "F"
+		fmt.Println("Enter the subject score (0-100)")
+		fmt.Scanln(&subjectScore)
+		if subjectScore < 0 || subjectScore > 100 {
+			fmt.Println("Invalid score. Please enter a score between 0 and 100.")
+			i-- // Retry this subject
+			continue
 		}
-		fmt.Println(key, value, grade)
+
+		subjectToScore[subjectName] = subjectScore
 	}
 
-	var average_score int
-
-	for _, value := range subject_to_score{
-		average_score += value
+	student := Student{
+		Name:         name,
+		SubjectScores: subjectToScore,
+		AverageGrade:  calculateAverage(subjectToScore),
 	}
 
-	average_score = average_score/number_of_suject
+	displayResults(student)
+}
 
-	fmt.Println("The average score is ", average_score)
+func calculateAverage(scores map[string]int) float64 {
+	var sum int
+	for _, score := range scores {
+		sum += score
+	}
+	return float64(sum) / float64(len(scores))
+}
+
+func getGrade(score int) string {
+	switch {
+	case score >= 70:
+		return "A"
+	case score >= 60:
+		return "B"
+	case score >= 50:
+		return "C"
+	case score >= 40:
+		return "D"
+	default:
+		return "F"
+	}
+}
+
+func displayResults(student Student) {
+	fmt.Printf("\nStudent Name: %s\n", student.Name)
+	fmt.Println("Subjects and Scores:")
+	for subject, score := range student.SubjectScores {
+		fmt.Printf("%s: %d (%s)\n", subject, score, getGrade(score))
+	}
+	fmt.Printf("Average Grade: %.2f\n", student.AverageGrade)
 }
