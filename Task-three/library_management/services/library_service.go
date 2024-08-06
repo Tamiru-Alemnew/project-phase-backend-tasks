@@ -1,4 +1,5 @@
 package services
+import "errors"
 import "github.com/Tamiru-Alemnew/project-phase-backend-tasks/Task-three/library_management/models"
 
 type Library struct {
