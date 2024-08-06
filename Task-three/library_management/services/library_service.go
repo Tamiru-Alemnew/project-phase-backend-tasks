@@ -7,7 +7,7 @@ type Library struct {
 	members map[int]models.Member
 }
 
-func NewLibrary() *Library {
+func NewLibrary() LibraryManager {
 	return &Library{
 		books:   make(map[int]models.Book),
 		members: make(map[int]models.Member),
