@@ -5,9 +5,6 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"strings"
-	"text/scanner"
-
 	"github.com/Tamiru-Alemnew/project-phase-backend-tasks/Task-three/library_management/models"
 	"github.com/Tamiru-Alemnew/project-phase-backend-tasks/Task-three/library_management/services"
 )
