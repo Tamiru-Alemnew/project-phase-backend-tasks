@@ -9,7 +9,7 @@ func TestPalindromeCheck(t *testing.T) {
 	text := "madam" 
 	expected := true 
 		
-	result := PalindromeCheck(text)
+	result := IsPalindrome(text)
 
 	if !reflect.DeepEqual(result, expected) {
 

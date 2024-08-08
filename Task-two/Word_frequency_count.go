@@ -7,7 +7,7 @@ import (
 
 
 // Function to count the frequency of each word in a string
-func wordFrequency(s string) map[string]int {
+func WordFrequency(s string) map[string]int {
 	// Create a map to store the frequency of each word
 	frequencyMap := make(map[string]int)
 

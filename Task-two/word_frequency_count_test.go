@@ -15,7 +15,7 @@ func TestWordFrequencyCount(t *testing.T) {
         "words":   1,
     }
 
-    result := WordFrequencyCount(text)
+    result := WordFrequency(text)
 
     if !reflect.DeepEqual(result, expected) {
         t.Errorf("Expected %v, but got %v", expected, result)

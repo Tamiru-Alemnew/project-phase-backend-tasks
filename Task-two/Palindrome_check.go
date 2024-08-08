@@ -5,7 +5,7 @@ import (
 )
 
 // Function to check if a string is a palindrome
-func isPalindrome(s string) bool {
+func IsPalindrome(s string) bool {
 	// Helper function to remove non-alphanumeric characters and convert to lowercase
 	normalize := func(r rune) rune {
 		if unicode.IsLetter(r) || unicode.IsDigit(r) {
